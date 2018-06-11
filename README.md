@@ -17,8 +17,12 @@ Islam Gamal  2D Graphics Programming in the engine
 Ahmed Tolba  3D Graphics Programming in the engine 
 
 
-A video that shows the current progress
-
+A video that shows the current progress of 2D Graphics programming caps
 https://www.youtube.com/watch?v=x73PMw3GKkk
+
+A video that shows 3D Rendering 
+
+https://www.youtube.com/watch?v=mEygRc47jaA
+
 
  

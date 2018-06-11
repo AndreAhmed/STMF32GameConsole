@@ -16,4 +16,9 @@ Authors:
 Islam Gamal  2D Graphics Programming in the engine
 Ahmed Tolba  3D Graphics Programming in the engine 
 
+
+A video that shows the current progress
+
+https://www.youtube.com/watch?v=x73PMw3GKkk
+
  

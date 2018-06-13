@@ -273,7 +273,7 @@ int main(void)
 						
 						
 				BSP_LCD_DrawBitmap(!active, 0,0, (uint8_t*)back_bitmap.data);
-						
+				//blit(&back_bitmap ,fb, 0 , 0 , 0 , 0 ,SCREEN_WIDTH  , SCREEN_HEIGHT);
 				DrawSprite(&pipe1.spr, fb );
 				DrawSprite(&pipe2.spr, fb );
 				DrawSprite(&bird.spr, fb );
@@ -346,7 +346,7 @@ static void SystemClock_Config(void)
 	RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
 	RCC_OscInitStruct.PLL.PLLM = 8;
 	RCC_OscInitStruct.PLL.PLLN = 360;
-	RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
+	RCC_OscInitStruct.PLL.PLLP = 2;
 	RCC_OscInitStruct.PLL.PLLQ = 7;
 	HAL_RCC_OscConfig(&RCC_OscInitStruct);
 

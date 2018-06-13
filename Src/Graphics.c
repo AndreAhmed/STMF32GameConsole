@@ -702,16 +702,21 @@ int Rotate_Polygon3D_YAxis(object_ptr poly, int theta)
 Sprite Library
 */
 
-void blit(BITMAP_PTR SrcPm,  int src_x, int src_y, int dst_x, int dst_y, int w, int h)
+void blit(BITMAP_PTR SrcPm, uint8_t *fb,  int src_x, int src_y, int dst_x, int dst_y, int w, int h)
 {
-	for (int i = 0; i <  w ; i++)
-        for (int j = 0 ; j < h ; j++) {
-            uint16_t color = SrcPm->data[(src_y+j)*SrcPm->w + (src_x+i)];
-            if (color != 0)
-            {
-							BSP_LCD_DrawPixel( i + dst_x, j + dst_y , color) ;
-            }
-        }
+	uint16_t *ptr = (uint16_t*)SrcPm->data;
+	for (uint32_t i = 0; i <  h ; i++)
+	{
+		for (uint32_t j = 0; j  < w; j++)
+		{
+			uint16_t color = *ptr++;
+ 		 
+				 *(__IO uint16_t*) (fb + (2*((dst_y+i)*BSP_LCD_GetXSize() + dst_x + j))) = color;
+
+		}
+	
+  }
+				 
 }
 
 void  erase_spr(sprite_ptr spr , BITMAP_PTR src_bitmap)
@@ -722,7 +727,7 @@ void  erase_spr(sprite_ptr spr , BITMAP_PTR src_bitmap)
      if(x < 0 ) x = 0;
      if(x > SCREEN_WIDTH) x = SCREEN_HEIGHT ;	
      	
-         blit( src_bitmap ,  x , y ,x , y, spr->width , spr->height) ;
+       //  blit( src_bitmap ,  x , y ,x , y, spr->width , spr->height) ;
 }
 
 
@@ -802,15 +807,23 @@ void  DrawSprite(sprite_ptr spr, uint8_t *fb)
 {
 	  const uint16_t* data = (spr->num_frames > 1 ) ? spr->frames[spr->curr_frame] : spr->imgData  ; 
 		
-    for (int i = 0; i < spr->width; i++)
-        for (int j = 0; j < spr->height; j++) {
-            uint16_t color = data[j*spr->width + i];
+ 		
+	  uint32_t spriteHeight = spr->height;
+	  uint32_t spriteWidth  = spr->width;
+	  uint32_t x = spr->x;
+	  uint32_t y = spr->y;
+    for (uint32_t i = 0; i < spriteHeight; i++)
+		{
+        for (uint32_t j = 0; j < spriteWidth; j++) {
+            uint16_t color = *data++;
             if (color != 0)
-            {
-							LCD_DrawPixel(fb,  i + spr->x, j + spr->y, color) ;
+            { 
+								 *(__IO uint16_t*) (fb + (2*((i+y)*BSP_LCD_GetXSize() + j + x))) = color;
 
             }
-        }
+		     }
+				
+		}
 }
 
 int collision( sprite_ptr spr1 ,  sprite_ptr spr2)
@@ -852,7 +865,7 @@ void  DrawBitmap(const uint16_t*bitmap, int w, int h, int x, int y, float angle,
    
   	for (i = 0; i < w; i++)
 		for (j = 0; j < h; j++) {
-		// LCD_DrawPixel(layer, i + x,j + y  , bitmap[(w*j + i )]);
+		 //LCD_DrawPixel(layer, i + x,j + y  , bitmap[(w*j + i )]);
  			 
 		}
 	   

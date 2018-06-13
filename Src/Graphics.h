@@ -197,7 +197,7 @@ void Mat_Zero_4x4(matrix_4x4 a);
 
 void Mat_Copy_4x4(matrix_4x4 source, matrix_4x4 destination);
 
-void  blit(BITMAP_PTR SrcPm,  int src_x, int src_y, int dst_x, int dst_y, int w, int h) ;
+void  blit(BITMAP_PTR SrcPm,uint8_t *fb,  int src_x, int src_y, int dst_x, int dst_y, int w, int h) ;
 
 void InitSprite(sprite_ptr sprite, int x, int y, int width, int height, int ac, int as, int numframes);
 
